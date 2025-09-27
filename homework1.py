@@ -21,5 +21,3 @@ print(User_1.withdraw(1900))
 
 print(User_2.withdraw(257))
 print(User_1.deposit(3783))
-
-
