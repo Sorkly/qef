@@ -11,4 +11,4 @@ colorama.init # ініціалізація бібліотеки
 colorama.initialise # стиль тексту
 colorama.ansitowin32 # звязок з системою
 colorama.__doc__ #документація 
-colorama.__version__ #версія бібліотеки
+colorama.__version__ #версія бібліотеки ##
