@@ -1,0 +1,99 @@
+
+# import cv2
+ 
+# image_path = "C:\\Users\\Admin\\Desktop\\Python\\qef\\cat3.jpg"
+# cascade_path = 'C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\cv2\\data\\haarcascade_frontalcatface.xml'
+ 
+# image = cv2.imread(image_path)
+# if image is None:
+#     print("ПОМИЛКА: Зображення не завантажено! Перевірте шлях до файлу.")
+# else:
+#     print(f"Зображення завантажено. Розмір: {image.shape}")
+ 
+# cat_face_cascade = cv2.CascadeClassifier(cascade_path)
+# if cat_face_cascade.empty():
+#     print("ПОМИЛКА: XML-файл каскаду не завантажено! Перевірте шлях.")
+# else:
+#     print("Каскад завантажено успішно")
+ 
+# cat_face = cat_face_cascade.detectMultiScale(image)
+ 
+# print(f"Знайдено мордочок котів: {len(cat_face)}")
+# print(f"Координати: {cat_face}")
+ 
+# cv2.imshow("Cat", image)
+# cv2.waitKey()
+# cv2.destroyAllWindows()
+
+# import cv2
+ 
+# image_path = "C:\\Users\\Admin\\Desktop\\Python\\qef\\cat3.jpg"
+# cascade_path = 'C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\cv2\\data\\haarcascade_frontalcatface.xml'
+ 
+# image = cv2.imread(image_path)
+# if image is None:
+#     print("ПОМИЛКА: Зображення не завантажено! Перевірте шлях до файлу.")
+# else:
+#     print(f"Зображення завантажено. Розмір: {image.shape}")
+ 
+# cat_face_cascade = cv2.CascadeClassifier(cascade_path)
+# if cat_face_cascade.empty():
+#     print("ПОМИЛКА: XML-файл каскаду не завантажено! Перевірте шлях.")
+# else:
+#     print("Каскад завантажено успішно")
+ 
+# cat_face = cat_face_cascade.detectMultiScale(image)
+ 
+# print(f"Знайдено мордочок котів: {len(cat_face)}")
+# print(f"Координати: {cat_face}")
+ 
+# for (x, y, w, h) in cat_face:
+#     cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
+ 
+# cv2.imshow("Cat", image)
+# cv2.waitKey()
+# cv2.destroyAllWindows()
+ 
+
+import cv2
+from PIL import Image
+ 
+image_path = "C:\\Users\\Admin\\Desktop\\Python\\qef\\cat4.jpg"
+cascade_path = 'C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\cv2\\data\\haarcascade_frontalcatface.xml'
+glasses_path = 'C:\\Users\\Admin\\Desktop\\Python\\qef\\glasses.png'
+ 
+image = cv2.imread(image_path)
+if image is None:
+    print("ПОМИЛКА: Зображення не завантажено! Перевірте шлях до файлу.")
+    exit()
+else:
+    print(f"Зображення завантажено. Розмір: {image.shape}")
+ 
+cat_face_cascade = cv2.CascadeClassifier(cascade_path)
+if cat_face_cascade.empty():
+    print("ПОМИЛКА: XML-файл каскаду не завантажено! Перевірте шлях.")
+    exit()
+else:
+    print("Каскад завантажено успішно")
+ 
+cat_face = cat_face_cascade.detectMultiScale(image)
+ 
+print(f"Знайдено мордочок котів: {len(cat_face)}")
+print(f"Координати: {cat_face}")
+ 
+cat = Image.open(image_path)
+glasses = Image.open(glasses_path)
+cat = cat.convert("RGBA")
+glasses = glasses.convert("RGBA")
+ 
+for (x, y, w, h) in cat_face:
+    glasses_resized = glasses.resize((w, int(h/3)))
+    cat.paste(glasses_resized, (x, int(y + h/4)), glasses_resized)
+ 
+output_path = 'C:\\Users\\Admin\\Desktop\\Python\\qef\\cat_with_glasses2.png'
+cat.save(output_path)
+ 
+cat_with_glasses = cv2.imread(output_path)
+cv2.imshow("Cat_with_glasses", cat_with_glasses)
+cv2.waitKey()
+cv2.destroyAllWindows()
